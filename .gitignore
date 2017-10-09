@@ -12,6 +12,10 @@
 *.vjs_c
 *.vxml_c
 *.vcss_c
+*.vanim_c
+*.vmdl_c
+*.vmesh_c
+*.vagrp_c
 
 # Commit panorama compiled textures
 !game/dota_addons/btmap/panorama/images/*.vtex_c
