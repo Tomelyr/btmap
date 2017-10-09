@@ -1,0 +1,19 @@
+.shalltear
+{
+  width: 313px;
+  height: 25px;
+
+  horizontal-align: center;
+  vertical-align: bottom;
+  margin-right:43px;
+  margin-bottom: 6px;
+
+  background-color: blue;
+}
+
+#blood
+{
+  vertical-align: center;
+  horizontal-align: center;
+  font-color: #000000;
+}

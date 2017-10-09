@@ -95,6 +95,8 @@ function BTMap:OnAbilityUsed(keys)
 
   local player = PlayerResource:GetPlayer(keys.PlayerID)
   local abilityname = keys.abilityname
+  local hero = player:GetAssignedHero()
+  if hero.blood then DebugPrint('[BTMap] Blood: ' .. hero.blood) end
 end
 
 -- A non-player entity (necro-book, chen creep, etc) used an ability
@@ -103,6 +105,7 @@ function BTMap:OnNonPlayerUsedAbility(keys)
   DebugPrintTable(keys)
 
   local abilityname=  keys.abilityname
+
 end
 
 -- A player changed their name
@@ -121,6 +124,12 @@ function BTMap:OnPlayerLearnedAbility( keys)
 
   local player = EntIndexToHScript(keys.player)
   local abilityname = keys.abilityname
+  local hero = player:GetAssignedHero()
+
+  if abilityname == "hero_shalltear_skill2" then
+    DebugPrint("[BTMAP] Shalltear 2")
+    hero:FindAbilityByName("hero_shalltear_skill5"):SetLevel(hero:FindAbilityByName("hero_shalltear_skill2"):GetLevel())
+  end
 end
 
 -- A channelled ability finished by either completing or being interrupted

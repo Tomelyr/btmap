@@ -1,0 +1,36 @@
+"hero_shalltear_skill2"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    //"ID"              "5343"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+    "MaxLevel"            "4"
+    "BaseClass"           "ability_datadriven"
+    "AbilityTextureName"            "rubick_empty1"
+    "AbilityManaCost"	"0"
+    "AbilityDamage"	"100"
+    "AbilityCooldown"				"8.0"
+  
+    "AbilitySpecial"
+    {
+    	"01"
+    	{
+    		"var_type"			"FIELD_INTEGER"
+    		"radius"			"600"
+    	}
+    	"02"
+    	{
+    		"var_type"			"FIELD_INTEGER"
+    		"mana_gain"		"10 20 30 40"
+    	}
+    }
+
+    "OnSpellStart"
+    {
+    	"RunScript"
+    	{
+    		"ScriptFile"	"heroes/hero_shalltear.lua"
+    		"Function"		"ManaOnSkill"
+    	}
+    }
+  }

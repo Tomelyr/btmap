@@ -1,0 +1,12 @@
+<root> 
+	<styles>
+		<include src="file://{resources}/styles/shalltear.css" />
+	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/shalltear/shalltear.js" />
+	</scripts>
+
+    <Panel class="shalltear">
+    	<Label id="blood" text="Penis" />
+    </Panel>
+</root>

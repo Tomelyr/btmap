@@ -1,0 +1,46 @@
+"hero_shalltear_skill0"
+{
+	// General
+	//-------------------------------------------------------------------------------------------------------------
+	//"ID"              "5343"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+	"AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+	"MaxLevel"            "1"
+	"BaseClass"           "ability_datadriven"
+	"AbilityTextureName"            "rubick_empty1"
+	"Modifiers"
+	{
+		"rage_modifier"
+		{
+			"Passive"	"1"
+			"IsBuff"	"1"
+			"IsHidden"	"0"
+			
+			"OnCreated"
+			{
+				"RunScript"
+				{
+					"ScriptFile"	"heroes/hero_shalltear.lua"
+					"Function"	"ZeroManaOnSpawn"
+				}
+			}
+			"OnAttackLanded"
+			{
+				"RunScript"
+				{
+					"ScriptFile"	"heroes/hero_shalltear.lua"
+					"Function"  "ManaOnAttack"
+				}
+			}
+			"OnAttacked"
+			{
+			   "RunScript"
+				{
+					"ScriptFile"	"heroes/hero_shalltear.lua"
+					"Function"  "ManaOnAttacked"
+				}
+			}
+		}
+	}
+}
+
+

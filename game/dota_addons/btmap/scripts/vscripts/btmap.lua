@@ -98,21 +98,25 @@ end
   The hero parameter is the hero entity that just spawned in
 ]]
 function BTMap:OnHeroInGame(hero)
-  DebugPrint("[BTMAP] Hero spawned in game for first time -- " .. hero:GetUnitName())
+	DebugPrint("[BTMAP] Hero spawned in game for first time -- " .. hero:GetUnitName())
 
-  -- This line for example will set the starting gold of every hero to 500 unreliable gold
-  --hero:SetGold(500, false)
+	-- Remove Wearables.
+	local children = hero:GetChildren()
+	for k,child in pairs(children) do
+		if child:GetClassname() == "dota_item_wearable" then
+			child:RemoveSelf()
+		end
+	end
 
-  -- These lines will create an item and add it to the player, effectively ensuring they start with the item
-  --local item = CreateItem("item_example_item", hero, hero)
-  --hero:AddItem(item)
-
-  --[[ --These lines if uncommented will replace the W ability of any hero that loads into the game
-    --with the "example_ability" ability
-
-  local abil = hero:GetAbilityByIndex(1)
-  hero:RemoveAbility(abil:GetAbilityName())
-  hero:AddAbility("example_ability")]]
+  -- Shalltear Rage
+	local heroName = hero:GetUnitName()
+	if heroName == "npc_dota_hero_ancient_apparition" then
+	
+		hero:AddAbility("hero_shalltear_skill0") -- Rage Modifier
+    hero:FindAbilityByName("hero_shalltear_skill0"):SetLevel(1)
+    hero:AddAbility("hero_shalltear_skill5") -- Skill 2 AoE Damage
+    CustomUI:DynamicHud_Create(hero:GetPlayerOwnerID(), "blood", "file://{resources}/layout/custom_game/shalltear.xml", nil)  
+  end
 end
 
 --[[
@@ -122,12 +126,6 @@ end
 ]]
 function BTMap:OnGameInProgress()
   DebugPrint("[BTMAP] The game has officially begun")
-
-  Timers:CreateTimer(30, -- Start this timer 30 game-time seconds later
-    function()
-      DebugPrint("This function is called 30 seconds after the game begins, and every 30 seconds thereafter")
-      return 30.0 -- Rerun this timer every 30 game-time seconds 
-    end)
 end
 
 
@@ -137,24 +135,5 @@ end
 function BTMap:InitBTMap()
   BTMap = self
   DebugPrint('[BTMAP] Starting to load BTMap btmap...')
-
-  -- Commands can be registered for debugging purposes or as functions that can be called by the custom Scaleform UI
-  Convars:RegisterCommand( "command_example", Dynamic_Wrap(BTMap, 'ExampleConsoleCommand'), "A console command example", FCVAR_CHEAT )
-
   DebugPrint('[BTMAP] Done loading BTMap btmap!\n\n')
-end
-
--- This is an example console command
-function BTMap:ExampleConsoleCommand()
-  print( '******* Example Console Command ***************' )
-  local cmdPlayer = Convars:GetCommandClient()
-  if cmdPlayer then
-    local playerID = cmdPlayer:GetPlayerID()
-    if playerID ~= nil and playerID ~= -1 then
-      -- Do something here for the player who called this command
-      PlayerResource:ReplaceHeroWith(playerID, "npc_dota_hero_viper", 1000, 1000)
-    end
-  end
-
-  print( '*********************************************' )
 end
